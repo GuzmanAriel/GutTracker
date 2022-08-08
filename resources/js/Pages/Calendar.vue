@@ -7,8 +7,9 @@
 
     <div class="ariel">
         hello
-        <div v-for="meal in meals" :key="meal.id">
+        <div class="mt-8" v-for="meal in meals" :key="meal.id">
             <p>{{ meal.description }}</p>
+            <p>{{ meal.meal_time }}</p>
         </div>
     </div>
 </template>
