@@ -54,6 +54,7 @@
                 </div>
 
             </form>
+            <Link href="/register" class="underline text-primary text-sm">Or Register Here</Link>
         </section>
     </main>
 </template>
@@ -65,7 +66,7 @@ export default {
 </script>
 
 <script setup>
-
+import { Link } from "@inertiajs/inertia-vue3";
 import { useForm} from "@inertiajs/inertia-vue3";
 
 let form = useForm({

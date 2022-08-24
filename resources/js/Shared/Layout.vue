@@ -15,7 +15,7 @@
                 </h1>
 
                 <p class="text-sm ml-4">
-                    Welcome Back
+                    Welcome Back {{ username }}
                 </p>
             </div>
 

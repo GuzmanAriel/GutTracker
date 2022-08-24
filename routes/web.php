@@ -10,6 +10,12 @@ Route::get('login', [LoginController::class, 'create'])->name('login');
 Route::post('login', [LoginController::class, 'store']);
 Route::post('logout', [LoginController::class, 'destroy'])->middleware('auth');
 
+Route::get('register', function(){
+    return Inertia::render('Register');
+});
+
+Route::middleware('auth')->group(function(){
+
 
 
     Route::get('/', function () {
@@ -18,22 +24,6 @@ Route::post('logout', [LoginController::class, 'destroy'])->middleware('auth');
         ]);
     });
 
-    Route::get('/users', function () {
-        return Inertia::render('Users/Index', [
-            'users' => User::query()
-                           ->when(Request::input('search'), function ($query, $search) {
-                               $query->where('name', 'like', "%{$search}%");
-                           })
-                           ->paginate(10)
-                           ->withQueryString()
-                           ->through(fn($user) => [
-                               'id' => $user->id,
-                               'name' => $user->name
-                           ]),
-
-            'filters' => Request::only(['search'])
-        ]);
-    });
 
     Route::middleware('auth')->get('/calendar', function (User $user, Meal $meal) {
         return Inertia::render('Calendar', [
@@ -47,9 +37,6 @@ Route::post('logout', [LoginController::class, 'destroy'])->middleware('auth');
         ]);
     });
 
-    Route::get('users/create', function () {
-        return Inertia::render('Users/Create');
-    });
 
     Route::post('/users', function () {
 
@@ -61,7 +48,8 @@ Route::post('logout', [LoginController::class, 'destroy'])->middleware('auth');
 
         User::create($attributes);
 
-        return redirect('/users');
+        return redirect('/calendar');
     });
 
+});
 
