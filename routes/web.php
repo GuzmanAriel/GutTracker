@@ -1,7 +1,12 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Models\AbdominalSymptom;
+use App\Models\BloatingSymptom;
+use App\Models\BrainSymptom;
+use App\Models\DiscomfortSymptom;
 use App\Models\Meal;
+use App\Models\OverallSymptom;
 use App\Models\Stool;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +32,9 @@ Route::middleware('auth')->group(function(){
     });
 
 
-    Route::middleware('auth')->get('/calendar', function (User $user, Meal $meal, Stool $stool) {
+    Route::middleware('auth')->get('/calendar', function (User $user, Meal $meal, Stool $stool,
+        OverallSymptom $overallSymptom, AbdominalSymptom $abdominalSymptom, BloatingSymptom $bloatingSymptom,
+        BrainSymptom $brainSymptom, DiscomfortSymptom $discomfortSymptom) {
         return Inertia::render('Calendar', [
             'meals' => Auth::user()->meals->map(function ($meal) {
                 return [
@@ -37,10 +44,19 @@ Route::middleware('auth')->group(function(){
                 ];
             }),
             'stools' => Auth::user()->stools->map(function($stool){
+
                 return [
                     'id' => $stool->id,
                     'stool_symptom' => $stool->stool_symptom,
                     'stool_time' => \Carbon\Carbon::parse($stool->stool_time)->diffForHumans(),
+                ];
+            }),
+            'overallSymptoms' => Auth::user()->overallSymptoms->map(function($overallSymptom){
+
+                return [
+                    'id' => $overallSymptom->id,
+                    'overall_symptom' => $overallSymptom->overall_symptom,
+                    'overall_symptom_time' => \Carbon\Carbon::parse($overallSymptom->overall_symptom_time)->diffForHumans(),
                 ];
             })
         ]);

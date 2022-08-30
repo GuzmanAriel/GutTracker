@@ -16,7 +16,7 @@ class OverallSymptomFactory extends Factory
     {
         return [
             'overall_symptom_time' => now()->subDays(rand(1, 7)),
-            'overall_symptom' => rand(0, 6),
+            'overall_symptom' => rand(0, 2),
             'user_id' => User::factory(),
         ];
     }

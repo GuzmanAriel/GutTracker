@@ -15,6 +15,11 @@
             <p>{{ stool.stool_symptom }}</p>
             <p>{{ stool.stool_time }}</p>
         </div>
+
+        <div class="mt-8" v-for="overallSymptom in overallSymptoms" :key="overallSymptom.id">
+            <p>{{ overallSymptom.overall_symptom }}</p>
+            <p>{{ overallSymptom.overall_symptom_time }}</p>
+        </div>
     </div>
 </template>
 
@@ -29,6 +34,7 @@ import EventCalendar from "../Components/EventCalendar";
 let props = defineProps({
     meals: Object,
     stools: Object,
+    overallSymptoms: Object
 });
 
 </script>

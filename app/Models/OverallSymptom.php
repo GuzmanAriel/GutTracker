@@ -14,4 +14,9 @@ class OverallSymptom extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    public function getOverallSymptomAttribute($value){
+        $symptom = config('symptoms.overallSymptoms');
+        return $symptom[$value];
+    }
 }
