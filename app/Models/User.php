@@ -50,4 +50,8 @@ class User extends Authenticatable
         return $this->hasMany(Meal::class);
 
     }
+
+    public function stool(){
+        return $this->hasMany(Stool::class);
+    }
 }

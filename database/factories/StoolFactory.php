@@ -5,7 +5,7 @@ namespace Database\Factories;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class MealFactory extends Factory
+class StoolFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -15,8 +15,8 @@ class MealFactory extends Factory
     public function definition()
     {
         return [
-            'meal_time' => now()->subDays(rand(1, 7)),
-            'description' => $this->faker->paragraph,
+            'stool_time' => now()->subDays(rand(1, 7)),
+            'stool_symptom' => rand(0, 6),
             'user_id' => User::factory(),
         ];
     }
