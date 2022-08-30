@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Models\Meal;
+use App\Models\Stool;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -25,13 +27,20 @@ Route::middleware('auth')->group(function(){
     });
 
 
-    Route::middleware('auth')->get('/calendar', function (User $user, Meal $meal) {
+    Route::middleware('auth')->get('/calendar', function (User $user, Meal $meal, Stool $stool) {
         return Inertia::render('Calendar', [
             'meals' => Auth::user()->meals->map(function ($meal) {
                 return [
                     'id' => $meal->id,
                     'description' => $meal->description,
                     'meal_time' => \Carbon\Carbon::parse($meal->meal_time)->diffForHumans(),
+                ];
+            }),
+            'stools' => Auth::user()->stools->map(function($stool){
+                return [
+                    'id' => $stool->id,
+                    'stool_symptom' => $stool->stool_symptom,
+                    'stool_time' => \Carbon\Carbon::parse($stool->stool_time)->diffForHumans(),
                 ];
             })
         ]);

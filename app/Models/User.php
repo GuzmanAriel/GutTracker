@@ -51,7 +51,11 @@ class User extends Authenticatable
 
     }
 
-    public function stool(){
+    public function stools(){
         return $this->hasMany(Stool::class);
+    }
+
+    public function overallSymptoms(){
+        return $this->hasMany(OverallSymptom::class);
     }
 }
