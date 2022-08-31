@@ -58,4 +58,24 @@ class User extends Authenticatable
     public function overallSymptoms(){
         return $this->hasMany(OverallSymptom::class);
     }
+
+    public function abdominalSymptoms(){
+        return $this->hasMany(AbdominalSymptom::class);
+    }
+
+    public function bloatingSymptoms(){
+        return $this->hasMany(BloatingSymptom::class);
+    }
+
+    public function brainSymptoms(){
+        return $this->hasMany(BrainSymptom::class);
+    }
+
+    public function discomfortSymptoms(){
+        return $this->hasMany(DiscomfortSymptom::class);
+    }
+
+    public function fatigueSymptoms(){
+        return $this->hasMany(FatigueSymptom::class);
+    }
 }

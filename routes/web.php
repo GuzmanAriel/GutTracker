@@ -58,7 +58,48 @@ Route::middleware('auth')->group(function(){
                     'overall_symptom' => $overallSymptom->overall_symptom,
                     'overall_symptom_time' => \Carbon\Carbon::parse($overallSymptom->overall_symptom_time)->diffForHumans(),
                 ];
-            })
+            }),
+            'abdominalSymptoms' => Auth::user()->abdominalSymptoms->map(function($abdominalSymptom){
+
+                return [
+                    'id' => $abdominalSymptom->id,
+                    'abdominal_symptom' => $abdominalSymptom->abdominal_symptom,
+                    'abdominal_symptom_time' => \Carbon\Carbon::parse($abdominalSymptom->abdominal_symptom_time)->diffForHumans(),
+                ];
+            }),
+            'bloatingSymptoms' => Auth::user()->bloatingSymptoms->map(function($bloatingSymptom){
+
+                return [
+                    'id' => $bloatingSymptom->id,
+                    'bloating_symptom' => $bloatingSymptom->bloating_symptom,
+                    'bloating_symptom_time' => \Carbon\Carbon::parse($bloatingSymptom->bloating_symptom_time)->diffForHumans(),
+                ];
+            }),
+            'brainSymptoms' => Auth::user()->brainSymptoms->map(function($brainSymptom){
+
+                return [
+                    'id' => $brainSymptom->id,
+                    'brain_symptom' => $brainSymptom->brain_symptom,
+                    'brain_symptom_time' => \Carbon\Carbon::parse($brainSymptom->brain_symptom_time)->diffForHumans(),
+                ];
+            }),
+            'discomfortSymptoms' => Auth::user()->discomfortSymptoms->map(function($discomfortSymptom){
+
+                return [
+                    'id' => $discomfortSymptom->id,
+                    'discomfort_symptom' => $discomfortSymptom->discomfort_symptom,
+                    'discomfort_symptom_time' => \Carbon\Carbon::parse($discomfortSymptom->discomfort_symptom_time)->diffForHumans(),
+                ];
+            }),
+
+            'fatigueSymptoms' => Auth::user()->fatigueSymptoms->map(function($fatigueSymptom){
+
+                return [
+                    'id' => $fatigueSymptom->id,
+                    'fatigue_symptom' => $fatigueSymptom->fatigue_symptom,
+                    'fatigue_symptom_time' => \Carbon\Carbon::parse($fatigueSymptom->fatigue_symptom_time)->diffForHumans(),
+                ];
+            }),
         ]);
     });
 

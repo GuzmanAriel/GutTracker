@@ -102,6 +102,12 @@ class DatabaseSeeder extends Seeder
             'user_id' => 1,
         ]);
 
+        BrainSymptom::create([
+            'brain_symptom_time' => now()->subDays(rand(1, 7)),
+            'brain_symptom' => rand(0, 10),
+            'user_id' => 1,
+        ]);
+
         DiscomfortSymptom::create([
             'discomfort_symptom_time' => now()->subDays(rand(1, 7)),
             'discomfort_symptom' => rand(0, 10),
