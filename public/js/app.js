@@ -35213,29 +35213,33 @@ __webpack_require__.r(__webpack_exports__);
     var id = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(10);
     var options = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
       plugins: [_fullcalendar_daygrid__WEBPACK_IMPORTED_MODULE_3__["default"], _fullcalendar_timegrid__WEBPACK_IMPORTED_MODULE_4__["default"], _fullcalendar_list__WEBPACK_IMPORTED_MODULE_5__["default"], _fullcalendar_interaction__WEBPACK_IMPORTED_MODULE_6__["default"]],
-      initialView: 'timeGridWeek',
+      initialView: 'timeGridDay',
       headerToolbar: {
-        left: 'prev,next today',
+        left: 'dayGridMonth, dayGridWeek, dayGridDay',
         center: 'title',
-        right: 'dayGridMonth, dayGridWeek, listDay'
+        right: 'today prev,next'
       },
       editable: true,
       selectable: true,
-      select: function select(arg) {
-        id.value = id.value + 1;
-        var cal = arg.view.calendar;
-        cal.unselect();
-        cal.addEvent({
-          id: "".concat(id.value),
-          title: "New Event ".concat(id.value),
-          start: arg.start,
-          end: arg.end,
-          allDay: true
-        });
-      },
-      eventClick: function eventClick(arg) {
-        console.log(arg.event.title);
+      dateClick: function dateClick(info) {
+        console.log(info);
       }
+      /* select: (arg) => {
+           id.value = id.value + 1;
+           const cal = arg.view.calendar;
+            cal.unselect()
+            cal.addEvent({
+               id: `${id.value}`,
+               title: `New Event ${id.value}`,
+               start: arg.start,
+               end: arg.end,
+               allDay: true
+           })
+       },
+       eventClick: (arg) => {
+           console.log(arg.event.title);
+       }*/
+
     });
     var __returned__ = {
       id: id,

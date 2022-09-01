@@ -20,15 +20,18 @@ const options = reactive({
         listPlugin,
         interactionPlugin
     ],
-    initialView: 'timeGridWeek',
+    initialView: 'timeGridDay',
     headerToolbar: {
-        left: 'prev,next today',
+        left: 'dayGridMonth, dayGridWeek, dayGridDay',
         center: 'title',
-        right: 'dayGridMonth, dayGridWeek, listDay'
+        right: 'today prev,next'
     },
     editable: true,
     selectable: true,
-    select: (arg) => {
+    dateClick: function(info) {
+        console.log(info);
+    }
+   /* select: (arg) => {
         id.value = id.value + 1;
         const cal = arg.view.calendar;
 
@@ -44,7 +47,7 @@ const options = reactive({
     },
     eventClick: (arg) => {
         console.log(arg.event.title);
-    }
+    }*/
 })
 
 </script>
