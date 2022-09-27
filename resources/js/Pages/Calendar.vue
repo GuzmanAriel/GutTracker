@@ -1,11 +1,30 @@
+<script setup>
+import { ref, watch } from "vue";
+import {Inertia} from "@inertiajs/inertia";
+import EventCalendar from "../Components/EventCalendar";
+
+
+
+let props = defineProps({
+    meals: Object,
+    stools: Object,
+    overallSymptoms: Object,
+    abdominalSymptoms: Object,
+    bloatingSymptoms: Object,
+    brainSymptoms: Object,
+    discomfortSymptoms: Object,
+    fatigueSymptoms: Object,
+});
+
+</script>
 <template>
     <Head title="Calendar" />
 
     <h1 class="text-3xl">
         Calendar
     </h1>
-    <EventCalendar/>
-    <div class="ariel">
+    <EventCalendar :overallSymptoms="overallSymptoms"/>
+    <div>
         <h3 class="mt-8 font-bold">Meals</h3>
         <div v-for="meal in meals" :key="meal.id">
             <p>{{ meal.description }}</p>
@@ -54,26 +73,5 @@
         </div>
     </div>
 </template>
-
-
-<script setup>
-import { ref, watch } from "vue";
-import {Inertia} from "@inertiajs/inertia";
-import EventCalendar from "../Components/EventCalendar";
-
-
-
-let props = defineProps({
-    meals: Object,
-    stools: Object,
-    overallSymptoms: Object,
-    abdominalSymptoms: Object,
-    bloatingSymptoms: Object,
-    brainSymptoms: Object,
-    discomfortSymptoms: Object,
-    fatigueSymptoms: Object,
-});
-
-</script>
 
 

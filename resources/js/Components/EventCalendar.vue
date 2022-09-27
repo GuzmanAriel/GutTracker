@@ -1,35 +1,3 @@
-<template>
-    <FullCalendar v-bind:options="options"/>
-    <div class="modal fixed z-10 left-0 top-0 w-full h-full light-bg pt-3.5" v-if="modalToggle">
-        <div class="flex min-h-full items-end justify-center">
-            <div class="modal-content bg-slate-50 m-auto w-4/5 rounded-md">
-                <div class="py-12 px-8 flex flex-col items-center">
-                    <h1 class="text-2xl mb-5">What would you like to add?</h1>
-                    <div class="flex justify-center w-full text-center">
-                        <div class="w-1/3">
-                            <div class="flex justify-center">
-                                <font-awesome-icon icon="fa-regular fa-face-smile" size="4x"/>
-                                <font-awesome-icon icon="fa-regular fa-face-frown" size="4x"/>
-                            </div>
-
-                            <p class="text-lg mt-2">Add Symptoms</p>
-                        </div>
-                        <div class="w-1/3">
-                            <font-awesome-icon icon="fa-solid fa-utensils" size="4x" />
-                            <p class="text-lg mt-2">Add Meal</p>
-                        </div>
-                        <div class="w-1/3 justify-center">
-                            <font-awesome-icon icon="fa-solid fa-poop" size="4x"/>
-                            <p class="text-lg mt-2">Add Stool</p>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</template>
-
 <script setup>
 import { ref, reactive } from 'vue'
 import '@fullcalendar/core/vdom' // solves problem with Vite
@@ -38,10 +6,37 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import listPlugin from '@fullcalendar/list'
 import interactionPlugin from '@fullcalendar/interaction'
+import OverallSymptomForm from "./OverallSymptomForm";
+
+let props = defineProps({
+    meals: Object,
+    stools: Object,
+    overallSymptoms: Object,
+    abdominalSymptoms: Object,
+    bloatingSymptoms: Object,
+    brainSymptoms: Object,
+    discomfortSymptoms: Object,
+    fatigueSymptoms: Object,
+});
 
 const id = ref(10);
 
-let modalToggle = ref(false);
+let modalToggle = ref(false)
+
+let formType = ref('')
+let symptomFormType = ref('')
+
+let toggleOptions = ref(true)
+
+let chosenFormType = (val) => {
+    formType.value = val;
+
+    toggleOptions.value = false;
+}
+
+let changeSymptomFormType = (event) => {
+    symptomFormType.value = event.target.value;
+};
 
 const options = reactive({
     plugins: [
@@ -61,23 +56,93 @@ const options = reactive({
     dateClick: function(info) {
         modalToggle.value = true;
     }
-   /* select: (arg) => {
-        id.value = id.value + 1;
-        const cal = arg.view.calendar;
+    /* select: (arg) => {
+         id.value = id.value + 1;
+         const cal = arg.view.calendar;
 
-        cal.unselect()
+         cal.unselect()
 
-        cal.addEvent({
-            id: `${id.value}`,
-            title: `New Event ${id.value}`,
-            start: arg.start,
-            end: arg.end,
-            allDay: true
-        })
-    },
-    eventClick: (arg) => {
-        console.log(arg.event.title);
-    }*/
+         cal.addEvent({
+             id: `${id.value}`,
+             title: `New Event ${id.value}`,
+             start: arg.start,
+             end: arg.end,
+             allDay: true
+         })
+     },
+     eventClick: (arg) => {
+         console.log(arg.event.title);
+     }*/
 })
 
 </script>
+
+<template>
+    <div>
+        <FullCalendar v-bind:options="options"/>
+        <div class="modal fixed z-10 left-0 top-0 w-full h-full light-bg pt-3.5" v-if="modalToggle">
+            <div class="flex min-h-full items-end justify-center">
+                <div class="modal-content bg-slate-50 m-auto w-4/5 rounded-md">
+                    <div class="py-12 px-8 flex flex-col items-center">
+                        <h1 class="text-2xl mb-5">What would you like to add?</h1>
+                        <div class="flex justify-center w-full text-center" v-if="toggleOptions">
+                            <div class="w-1/3 cursor-pointer" @click="chosenFormType('symptoms')">
+                                <div class="flex justify-center">
+                                    <font-awesome-icon icon="fa-regular fa-face-smile" size="4x"/>
+                                    <font-awesome-icon icon="fa-regular fa-face-frown" size="4x"/>
+                                </div>
+                                <p class="text-lg mt-2">Add Symptoms</p>
+                            </div>
+                            <div class="w-1/3 cursor-pointer" @click="chosenFormType('meal')">
+                                <font-awesome-icon icon="fa-solid fa-utensils" size="4x" />
+                                <p class="text-lg mt-2">Add Meal</p>
+                            </div>
+                            <div class="w-1/3 justify-center cursor-pointer" @click="chosenFormType('stool')">
+                                <font-awesome-icon icon="fa-solid fa-poop" size="4x"/>
+                                <p class="text-lg mt-2">Add Stool</p>
+                            </div>
+
+                        </div>
+
+                        <div v-if="formType == 'symptoms'">
+                            <label for="call-type" class="block text-sm font-medium text-gray-700"> Symptom Type </label>
+                            <div class="mt-1">
+                                <select name="call-type" id="call-type" @change="changeSymptomFormType($event)" class="mt-1 block w-full g-select">
+                                    <option value="-">-</option>
+                                    <option value="Overall Symptoms">Overall Symptoms</option>
+                                    <option value="Abdominal/Bloating Symptoms">Abdominal/Bloating Symptoms</option>
+                                    <option value="Discomfort Symptoms">Discomfort Symptoms</option>
+                                    <option value="Fatigue Symptoms">Fatigue Symptoms</option>
+                                    <option value="Brain Symptoms">Brain Symptoms</option>
+                                </select>
+                            </div>
+                            <div v-if="symptomFormType === 'Overall Symptoms'">
+                                <OverallSymptomForm :overallSymptoms="overallSymptoms"/>
+                            </div>
+
+                            <div v-else-if="symptomFormType === 'Abdominal/Bloating Symptoms'">
+                                Abdominal/Bloating Symptoms
+                            </div>
+
+                            <div v-else-if="symptomFormType === 'Discomfort Symptoms'">
+                                Discomfort Symptoms
+                            </div>
+
+                            <div v-else-if="symptomFormType === 'Fatigue Symptoms'">
+                                Fatigue Symptoms
+                            </div>
+
+                            <div v-else-if="symptomFormType === 'Brain Symptoms'">
+                                Brain Symptoms
+                            </div>
+                        </div>
+                        <div v-else-if="formType === 'meal'">Meals</div>
+                        <div v-else-if="formType === 'stool'">Stool</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</template>
+

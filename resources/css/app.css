@@ -7,4 +7,8 @@
         background-color: rgb(0,0,0); /* Fallback color */
         background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
     }
+
+    .g-select {
+        @apply pl-3 pr-10 py-2 text-base border border-gray-300 shadow-sm transition focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md disabled:opacity-75 disabled:bg-gray-100 disabled:text-gray-500;
+    }
 }

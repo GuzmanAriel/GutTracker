@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\OverallSymptomController;
 use App\Models\AbdominalSymptom;
 use App\Models\BloatingSymptom;
 use App\Models\BrainSymptom;
@@ -115,6 +116,11 @@ Route::middleware('auth')->group(function(){
         User::create($attributes);
 
         return redirect('/calendar');
+    });
+
+    Route::name('save.')->prefix('save')->group(function () {
+
+        Route::post('/overall-symptoms', [OverallSymptomController::class, 'save'])->name('overallSymptoms');
     });
 
 });
