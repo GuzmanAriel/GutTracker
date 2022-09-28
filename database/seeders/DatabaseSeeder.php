@@ -9,6 +9,7 @@ use App\Models\DiscomfortSymptom;
 use App\Models\FatigueSymptom;
 use App\Models\OverallSymptom;
 use App\Models\Stool;
+use App\Models\Symptom;
 use App\Models\User;
 use App\Models\Meal;
 use Illuminate\Database\Seeder;
@@ -59,78 +60,14 @@ class DatabaseSeeder extends Seeder
             'user_id' => 1
         ]);
 
-
-        OverallSymptom::create([
-            'overall_symptom_time' => now()->subDays(rand(1, 7)),
-            'overall_symptom' => rand(0, 2),
+        Symptom::create([
             'user_id' => 1,
-        ]);
-
-        OverallSymptom::create([
-            'overall_symptom_time' => now()->subDays(rand(1, 7)),
-            'overall_symptom' => rand(0, 2),
-            'user_id' => 1,
-        ]);
-
-        AbdominalSymptom::create([
-            'abdominal_symptom_time' => now()->subDays(rand(1, 7)),
-            'abdominal_symptom' => rand(0, 3),
-            'user_id' => 1,
-        ]);
-
-        AbdominalSymptom::create([
-            'abdominal_symptom_time' => now()->subDays(rand(1, 7)),
-            'abdominal_symptom' => rand(0, 3),
-            'user_id' => 1,
-        ]);
-
-        BloatingSymptom::create([
-            'bloating_symptom_time' => now()->subDays(rand(1, 7)),
-            'bloating_symptom' => rand(0, 10),
-            'user_id' => 1,
-        ]);
-
-        BloatingSymptom::create([
-            'bloating_symptom_time' => now()->subDays(rand(1, 7)),
-            'bloating_symptom' => rand(0, 10),
-            'user_id' => 1,
-        ]);
-
-        BrainSymptom::create([
-            'brain_symptom_time' => now()->subDays(rand(1, 7)),
-            'brain_symptom' => rand(0, 10),
-            'user_id' => 1,
-        ]);
-
-        BrainSymptom::create([
-            'brain_symptom_time' => now()->subDays(rand(1, 7)),
-            'brain_symptom' => rand(0, 10),
-            'user_id' => 1,
-        ]);
-
-        DiscomfortSymptom::create([
-            'discomfort_symptom_time' => now()->subDays(rand(1, 7)),
-            'discomfort_symptom' => rand(0, 10),
-            'user_id' => 1,
-        ]);
-
-        DiscomfortSymptom::create([
-            'discomfort_symptom_time' => now()->subDays(rand(1, 7)),
-            'discomfort_symptom' => rand(0, 10),
-            'user_id' => 1,
-        ]);
-
-        FatigueSymptom::create([
-            'fatigue_symptom_time' => now()->subDays(rand(1, 7)),
+            'symptom_time' => now()->subDays(rand(1, 7)),
             'fatigue_symptom' => rand(0, 10),
-            'user_id' => 1,
+            'discomfort_symptom' => rand(0, 10),
+            'brain_symptom' => rand(0, 10),
+            'bloating_symptom' => rand(0, 10),
+            'abdominal_symptom' => rand(0, 3),
         ]);
-
-        FatigueSymptom::create([
-            'fatigue_symptom_time' => now()->subDays(rand(1, 7)),
-            'fatigue_symptom' => rand(0, 10),
-            'user_id' => 1,
-        ]);
-
     }
 }
