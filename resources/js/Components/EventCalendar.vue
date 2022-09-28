@@ -6,17 +6,12 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import listPlugin from '@fullcalendar/list'
 import interactionPlugin from '@fullcalendar/interaction'
-import OverallSymptomForm from "./OverallSymptomForm";
+import SymptomForm from "./SymptomForm";
 
 let props = defineProps({
     meals: Object,
     stools: Object,
-    overallSymptoms: Object,
-    abdominalSymptoms: Object,
-    bloatingSymptoms: Object,
-    brainSymptoms: Object,
-    discomfortSymptoms: Object,
-    fatigueSymptoms: Object,
+    symptoms: Object,
 });
 
 const id = ref(10);
@@ -33,10 +28,6 @@ let chosenFormType = (val) => {
 
     toggleOptions.value = false;
 }
-
-let changeSymptomFormType = (event) => {
-    symptomFormType.value = event.target.value;
-};
 
 const options = reactive({
     plugins: [
@@ -84,7 +75,7 @@ const options = reactive({
             <div class="flex min-h-full items-end justify-center">
                 <div class="modal-content bg-slate-50 m-auto w-4/5 rounded-md">
                     <div class="py-12 px-8 flex flex-col items-center">
-                        <h1 class="text-2xl mb-5">What would you like to add?</h1>
+                        <h1 class="text-2xl mb-5 font-bold">What would you like to add?</h1>
                         <div class="flex justify-center w-full text-center" v-if="toggleOptions">
                             <div class="w-1/3 cursor-pointer" @click="chosenFormType('symptoms')">
                                 <div class="flex justify-center">
@@ -104,37 +95,8 @@ const options = reactive({
 
                         </div>
 
-                        <div v-if="formType === 'symptoms'">
-                            <label for="call-type" class="block text-sm font-medium text-gray-700"> Symptom Type </label>
-                            <div class="mt-1">
-                                <select name="call-type" id="call-type" @change="changeSymptomFormType($event)" class="mt-1 block w-full g-select">
-                                    <option value="-">-</option>
-                                    <option value="Overall Symptoms">Overall Symptoms</option>
-                                    <option value="Abdominal/Bloating Symptoms">Abdominal/Bloating Symptoms</option>
-                                    <option value="Discomfort Symptoms">Discomfort Symptoms</option>
-                                    <option value="Fatigue Symptoms">Fatigue Symptoms</option>
-                                    <option value="Brain Symptoms">Brain Symptoms</option>
-                                </select>
-                            </div>
-                            <div v-if="symptomFormType === 'Overall Symptoms'">
-                                <OverallSymptomForm :overallSymptoms="overallSymptoms"/>
-                            </div>
-
-                            <div v-else-if="symptomFormType === 'Abdominal/Bloating Symptoms'">
-                                Abdominal/Bloating Symptoms
-                            </div>
-
-                            <div v-else-if="symptomFormType === 'Discomfort Symptoms'">
-                                Discomfort Symptoms
-                            </div>
-
-                            <div v-else-if="symptomFormType === 'Fatigue Symptoms'">
-                                Fatigue Symptoms
-                            </div>
-
-                            <div v-else-if="symptomFormType === 'Brain Symptoms'">
-                                Brain Symptoms
-                            </div>
+                        <div v-if="formType === 'symptoms'" class="max-w-lg w-full">
+                                <SymptomForm :symptoms="symptoms"/>
                         </div>
                         <div v-else-if="formType === 'meal'">Meals</div>
                         <div v-else-if="formType === 'stool'">Stool</div>

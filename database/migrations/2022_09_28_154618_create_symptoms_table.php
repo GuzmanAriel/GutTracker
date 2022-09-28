@@ -18,6 +18,7 @@ class CreateSymptomsTable extends Migration
             $table->timestamps();
             $table->foreignId( 'user_id' );
             $table->timestamp( 'symptom_time' )->nullable();
+            $table->integer( 'overall_symptom' )->nullable();
             $table->integer( 'abdominal_symptom' )->nullable();
             $table->integer( 'discomfort_symptom' )->nullable();
             $table->integer( 'bloating_symptom' )->nullable();

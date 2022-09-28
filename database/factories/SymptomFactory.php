@@ -15,6 +15,7 @@ class SymptomFactory extends Factory
     public function definition()
     {
         return [
+            'overall_symptom' => rand(0, 2),
             'fatigue_symptom' => rand(0, 10),
             'discomfort_symptom' => rand(0, 10),
             'brain_symptom' => rand(0, 10),

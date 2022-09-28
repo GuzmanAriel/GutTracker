@@ -1,14 +1,10 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\OverallSymptomController;
-use App\Models\AbdominalSymptom;
-use App\Models\BloatingSymptom;
-use App\Models\BrainSymptom;
-use App\Models\DiscomfortSymptom;
+use App\Http\Controllers\SymptomController;
 use App\Models\Meal;
-use App\Models\OverallSymptom;
 use App\Models\Stool;
+use App\Models\Symptom;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -20,14 +16,12 @@ Route::post('logout', [LoginController::class, 'destroy'])->middleware('auth');
 
 Route::name('save.')->prefix('save')->group(function () {
 
-    Route::post('/overall-symptoms', [OverallSymptomController::class, 'store'])->name('overallSymptoms');
+    Route::post('/symptoms', [SymptomController::class, 'store'])->name('symptoms');
 });
 
 Route::get('register', function(){
     return Inertia::render('Register');
 });
-
-
 
 Route::middleware('auth')->group(function(){
 
@@ -42,8 +36,7 @@ Route::middleware('auth')->group(function(){
 
 
     Route::middleware('auth')->get('/calendar', function (User $user, Meal $meal, Stool $stool,
-        OverallSymptom $overallSymptom, AbdominalSymptom $abdominalSymptom, BloatingSymptom $bloatingSymptom,
-        BrainSymptom $brainSymptom, DiscomfortSymptom $discomfortSymptom) {
+        Symptom $symptom) {
         return Inertia::render('Calendar', [
             'meals' => Auth::user()->meals->map(function ($meal) {
                 return [
@@ -60,53 +53,17 @@ Route::middleware('auth')->group(function(){
                     'stool_time' => \Carbon\Carbon::parse($stool->stool_time)->diffForHumans(),
                 ];
             }),
-            'overallSymptoms' => Auth::user()->overallSymptoms->map(function($overallSymptom){
+            'symptoms' => Auth::user()->symptoms->map(function($symptom){
 
                 return [
-                    'id' => $overallSymptom->id,
-                    'overall_symptom' => $overallSymptom->overall_symptom,
-                    'overall_symptom_time' => \Carbon\Carbon::parse($overallSymptom->overall_symptom_time)->diffForHumans(),
-                ];
-            }),
-            'abdominalSymptoms' => Auth::user()->abdominalSymptoms->map(function($abdominalSymptom){
-
-                return [
-                    'id' => $abdominalSymptom->id,
-                    'abdominal_symptom' => $abdominalSymptom->abdominal_symptom,
-                    'abdominal_symptom_time' => \Carbon\Carbon::parse($abdominalSymptom->abdominal_symptom_time)->diffForHumans(),
-                ];
-            }),
-            'bloatingSymptoms' => Auth::user()->bloatingSymptoms->map(function($bloatingSymptom){
-
-                return [
-                    'id' => $bloatingSymptom->id,
-                    'bloating_symptom' => $bloatingSymptom->bloating_symptom,
-                    'bloating_symptom_time' => \Carbon\Carbon::parse($bloatingSymptom->bloating_symptom_time)->diffForHumans(),
-                ];
-            }),
-            'brainSymptoms' => Auth::user()->brainSymptoms->map(function($brainSymptom){
-
-                return [
-                    'id' => $brainSymptom->id,
-                    'brain_symptom' => $brainSymptom->brain_symptom,
-                    'brain_symptom_time' => \Carbon\Carbon::parse($brainSymptom->brain_symptom_time)->diffForHumans(),
-                ];
-            }),
-            'discomfortSymptoms' => Auth::user()->discomfortSymptoms->map(function($discomfortSymptom){
-
-                return [
-                    'id' => $discomfortSymptom->id,
-                    'discomfort_symptom' => $discomfortSymptom->discomfort_symptom,
-                    'discomfort_symptom_time' => \Carbon\Carbon::parse($discomfortSymptom->discomfort_symptom_time)->diffForHumans(),
-                ];
-            }),
-
-            'fatigueSymptoms' => Auth::user()->fatigueSymptoms->map(function($fatigueSymptom){
-
-                return [
-                    'id' => $fatigueSymptom->id,
-                    'fatigue_symptom' => $fatigueSymptom->fatigue_symptom,
-                    'fatigue_symptom_time' => \Carbon\Carbon::parse($fatigueSymptom->fatigue_symptom_time)->diffForHumans(),
+                    'id' => $symptom->id,
+                    'symptom_time' => \Carbon\Carbon::parse($symptom->symptom_time)->diffForHumans(),
+                    'overall_symptom' => $symptom->overall_symptom,
+                    'abdominal_symptom' => $symptom->abdominal_symptom,
+                    'bloating_symptom' => $symptom->bloating_symptom,
+                    'brain_symptom' => $symptom->brain_symptom,
+                    'discomfort_symptom' => $symptom->discomfort_symptom,
+                    'fatigue_symptom' => $symptom->fatigue_symptom,
                 ];
             }),
         ]);

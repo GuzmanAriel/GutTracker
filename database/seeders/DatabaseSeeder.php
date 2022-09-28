@@ -64,6 +64,7 @@ class DatabaseSeeder extends Seeder
             'user_id' => 1,
             'symptom_time' => now()->subDays(rand(1, 7)),
             'fatigue_symptom' => rand(0, 10),
+            'overall_symptom' => rand(0, 3),
             'discomfort_symptom' => rand(0, 10),
             'brain_symptom' => rand(0, 10),
             'bloating_symptom' => rand(0, 10),

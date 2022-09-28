@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\OverallSymptom;
+use App\Models\Symptom;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class OverallSymptomController extends Controller
+class SymptomController extends Controller
 {
     //
 
@@ -14,13 +14,14 @@ class OverallSymptomController extends Controller
     {
         $attributes = request()->validate([
             'overall_symptom' => 'required | integer',
+            'abdominal_symptom' => 'required | integer'
         ]);
         ;
 
         $attributes['user_id'] = auth()->id();
-        $attributes['overall_symptom_time'] = Carbon::now('UTC')->toDateTimeString();
+        $attributes['symptom_time'] = Carbon::now('UTC')->toDateTimeString();
 
-        OverallSymptom::create($attributes);
+        Symptom::create($attributes);
 
         return redirect('/calendar');
     }

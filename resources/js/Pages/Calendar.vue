@@ -8,12 +8,7 @@ import EventCalendar from "../Components/EventCalendar";
 let props = defineProps({
     meals: Object,
     stools: Object,
-    overallSymptoms: Object,
-    abdominalSymptoms: Object,
-    bloatingSymptoms: Object,
-    brainSymptoms: Object,
-    discomfortSymptoms: Object,
-    fatigueSymptoms: Object,
+    symptoms: Object,
 });
 
 </script>
@@ -23,7 +18,7 @@ let props = defineProps({
     <h1 class="text-3xl">
         Calendar
     </h1>
-    <EventCalendar :overallSymptoms="overallSymptoms"/>
+    <EventCalendar :symptoms="symptoms"/>
     <div>
         <h3 class="mt-8 font-bold">Meals</h3>
         <div v-for="meal in meals" :key="meal.id">
@@ -37,39 +32,25 @@ let props = defineProps({
             <p>{{ stool.stool_time }}</p>
         </div>
 
-        <h3 class="mt-8 font-bold">Overall Symptoms</h3>
-        <div v-for="overallSymptom in overallSymptoms" :key="overallSymptom.id">
-            <p>{{ overallSymptom.overall_symptom }}</p>
-            <p>{{ overallSymptom.overall_symptom_time }}</p>
-        </div>
-        <h3 class="mt-8 font-bold">Abdominal Symptoms</h3>
-        <div v-for="abdominalSymptom in abdominalSymptoms" :key="abdominalSymptom.id">
-            <p>{{ abdominalSymptom.abdominal_symptom }}/10</p>
-            <p>{{ abdominalSymptom.abdominal_symptom_time }}</p>
-        </div>
+        <div v-for="symptom in symptoms" :key="symptom.id">
+            <h3 class="mt-8 font-bold">Overall Symptoms</h3>
+            <p>{{ symptom.overall_symptom }}</p>
+            <p>{{ symptom.symptom_time }}</p>
 
-        <h3 class="mt-8 font-bold">Bloating Symptoms</h3>
-        <div v-for="bloatingSymptom in bloatingSymptoms" :key="bloatingSymptom.id">
-            <p>{{ bloatingSymptom.bloating_symptom }}/10</p>
-            <p>{{ bloatingSymptom.bloating_symptom_time }}</p>
-        </div>
+            <h3 class="mt-8 font-bold">Overall Abdominal Symptoms</h3>
+            <p>{{ symptom.abdominal_symptom }}/10</p>
 
-        <h3 class="mt-8 font-bold">Brain Fog</h3>
-        <div v-for="brainSymptom in brainSymptoms" :key="brainSymptom.id">
-            <p>{{ brainSymptom.brain_symptom }}/10</p>
-            <p>{{ brainSymptom.brain_symptom_time }}</p>
-        </div>
+            <h3 class="mt-8 font-bold">Abdominal Pain and Discomfort Symptoms</h3>
+            <p>{{ symptom.discomfort_symptom }}/10</p>
 
-        <h3 class="mt-8 font-bold">Discomfort Symptoms</h3>
-        <div v-for="discomfortSymptom in discomfortSymptoms" :key="discomfortSymptom.id">
-            <p>{{ discomfortSymptom.discomfort_symptom }}/10</p>
-            <p>{{ discomfortSymptom.discomfort_symptom_time }}</p>
-        </div>
+            <h3 class="mt-8 font-bold">Abdominal Bloating Symptoms</h3>
+            <p>{{ symptom.bloating_symptom }}/10</p>
 
-        <h3 class="mt-8 font-bold">Fatigue Symptoms</h3>
-        <div v-for="fatigueSymptom in fatigueSymptoms" :key="fatigueSymptom.id">
-            <p>{{ fatigueSymptom.fatigue_symptom }}/10</p>
-            <p>{{ fatigueSymptom.fatigue_symptom_time }}</p>
+            <h3 class="mt-8 font-bold">Brain Fog</h3>
+            <p>{{ symptom.brain_symptom }}/10</p>
+
+            <h3 class="mt-8 font-bold">Fatigue Symptoms</h3>
+            <p>{{ symptom.fatigue_symptom }}/10</p>
         </div>
     </div>
 </template>
