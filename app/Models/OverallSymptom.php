@@ -9,7 +9,7 @@ class OverallSymptom extends Model
 {
     use HasFactory;
 
-    protected $gaurded = [];
+    protected $guarded = [];
 
     public function user(){
         return $this->belongsTo(User::class);
