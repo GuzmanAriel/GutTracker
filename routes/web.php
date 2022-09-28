@@ -18,11 +18,19 @@ Route::get('login', [LoginController::class, 'create'])->name('login');
 Route::post('login', [LoginController::class, 'store']);
 Route::post('logout', [LoginController::class, 'destroy'])->middleware('auth');
 
+Route::name('save.')->prefix('save')->group(function () {
+
+    Route::post('/overall-symptoms', [OverallSymptomController::class, 'store'])->name('overallSymptoms');
+});
+
 Route::get('register', function(){
     return Inertia::render('Register');
 });
 
+
+
 Route::middleware('auth')->group(function(){
+
 
 
 
@@ -117,11 +125,5 @@ Route::middleware('auth')->group(function(){
 
         return redirect('/calendar');
     });
-
-    Route::name('save.')->prefix('save')->group(function () {
-
-        Route::post('/overall-symptoms', [OverallSymptomController::class, 'save'])->name('overallSymptoms');
-    });
-
 });
 

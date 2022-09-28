@@ -35970,6 +35970,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'OverallSymptomForm',
   props: {
@@ -35979,10 +35981,12 @@ __webpack_require__.r(__webpack_exports__);
     var expose = _ref.expose;
     expose();
     var props = __props;
-    var form = useForm(props.overallSymptoms);
+    var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.useForm)({
+      overall_symptom: ''
+    });
 
     var submitForm = function submitForm() {
-      form.post(route("save.overallSymptoms"), {
+      form.post("save/overall-symptoms", {
         preserveScroll: true,
         onSuccess: function onSuccess(page) {
           console.log('saved');
@@ -35996,7 +36000,8 @@ __webpack_require__.r(__webpack_exports__);
     var __returned__ = {
       props: props,
       form: form,
-      submitForm: submitForm
+      submitForm: submitForm,
+      useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.useForm
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -36382,7 +36387,7 @@ var _hoisted_7 = {
 };
 
 var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "text-lg mt-2"
+  "class": "text-lg mt-2 text-primary"
 }, "Add Symptoms", -1
 /* HOISTED */
 );
@@ -36451,9 +36456,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $setup.chosenFormType('symptoms');
     })
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_font_awesome_icon, {
+    "class": "text-primary",
     icon: "fa-regular fa-face-smile",
     size: "4x"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_font_awesome_icon, {
+    "class": "text-primary",
     icon: "fa-regular fa-face-frown",
     size: "4x"
   })]), _hoisted_8]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
@@ -36472,7 +36479,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_font_awesome_icon, {
     icon: "fa-solid fa-poop",
     size: "4x"
-  }), _hoisted_10])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.formType == 'symptoms' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  }), _hoisted_10])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.formType === 'symptoms' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
     name: "call-type",
     id: "call-type",
     onChange: _cache[3] || (_cache[3] = function ($event) {
@@ -36503,15 +36510,69 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
+
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "block mb-4 text-lg font-bold text-center",
+  "for": "overallSymptoms"
+}, " Overall Symptoms", -1
+/* HOISTED */
+);
+
+var _hoisted_2 = {
+  "class": "flex justify-between mb-2"
+};
+
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "block",
+  type: "submit"
+}, "Save", -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_font_awesome_icon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("font-awesome-icon");
+
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", {
+    "class": "mt-4",
     id: "overall-symptoms",
     name: "overall-symptoms",
-    onSubmit: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onSubmit: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $setup.submitForm && $setup.submitForm.apply($setup, arguments);
-    }, ["prevent"])),
-    "class": "flex flex-wrap"
-  }, null, 32
+    }, ["prevent"]))
+  }, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_font_awesome_icon, {
+    "class": "text-primary",
+    icon: "fa-regular fa-face-smile",
+    size: "4x"
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_font_awesome_icon, {
+    "class": "text-primary",
+    icon: "fa-regular fa-face-meh",
+    size: "4x"
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_font_awesome_icon, {
+    "class": "text-primary",
+    icon: "fa-regular fa-face-frown",
+    size: "4x"
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "class": "w-full",
+    type: "range",
+    min: "0",
+    max: "2",
+    step: "1",
+    name: "overallSymptoms",
+    id: "overallSymptoms",
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return $setup.form.overall_symptom = $event;
+    })
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.overall_symptom]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "number",
+    "class": "hidden",
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return $setup.form.overall_symptom = $event;
+    })
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.overall_symptom]]), _hoisted_3], 32
   /* HYDRATE_EVENTS */
   );
 }
@@ -37472,9 +37533,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /* add icons to the library */
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__.library.add(_fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_6__.faFaceSmile, _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_6__.faFaceFrown, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faPoop, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faUtensils);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__.library.add(_fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_6__.faFaceSmile, _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_6__.faFaceFrown, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faPoop, _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__.faUtensils, _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_6__.faFaceMeh);
 (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.createInertiaApp)({
   resolve: function resolve(name) {
     var page = __webpack_require__("./resources/js/Pages sync recursive ^\\.\\/.*$")("./".concat(name))["default"];

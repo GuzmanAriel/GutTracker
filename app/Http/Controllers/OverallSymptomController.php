@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OverallSymptom;
 use Illuminate\Http\Request;
 
 class OverallSymptomController extends Controller
 {
     //
 
-    public function save()
+    public function store(Request $request)
     {
+        dd('hello world');
         $attributes = request()->validate([
             'title' => 'required',
             'thumbnail' => 'required|image',
@@ -22,7 +24,7 @@ class OverallSymptomController extends Controller
         $attributes['user_id'] = auth()->id();
         $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
 
-        Post::create($attributes);
+        OverallSymptom::create($attributes);
 
         return redirect('/');
     }

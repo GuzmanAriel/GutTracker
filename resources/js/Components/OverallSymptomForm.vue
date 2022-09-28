@@ -1,11 +1,15 @@
 <script setup>
+import { useForm } from "@inertiajs/inertia-vue3";
+
 let props = defineProps({
     overallSymptoms: Object
 });
 
-let form = useForm(props.overallSymptoms);
+let form = useForm({
+    overall_symptom: ''
+});
 let submitForm = () => {
-    form.post(route("save.overallSymptoms"), {
+    form.post("save/overall-symptoms", {
         preserveScroll: true,
         onSuccess: (page) => {
             console.log('saved');
@@ -18,8 +22,17 @@ let submitForm = () => {
 </script>
 
 <template>
-    <form id="overall-symptoms" name="overall-symptoms" @submit.prevent="submitForm" class="flex flex-wrap">
+    <form class="mt-4" id="overall-symptoms" name="overall-symptoms" @submit.prevent="submitForm">
+        <label class="block mb-4 text-lg font-bold text-center" for="overallSymptoms"> Overall Symptoms</label>
+        <div class="flex justify-between mb-2">
+            <font-awesome-icon class="text-primary" icon="fa-regular fa-face-smile" size="4x"/>
+            <font-awesome-icon class="text-primary" icon="fa-regular fa-face-meh" size="4x"/>
+            <font-awesome-icon class="text-primary" icon="fa-regular fa-face-frown" size="4x"/>
+        </div>
+        <input class="w-full" type="range" min="0" max="2" step="1" name="overallSymptoms" id="overallSymptoms" v-model="form.overall_symptom">
+        <input type="number" class="hidden" v-model="form.overall_symptom"/>
 
+        <button class="block" type="submit">Save</button>
     </form>
 </template>
 

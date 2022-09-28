@@ -88,10 +88,10 @@ const options = reactive({
                         <div class="flex justify-center w-full text-center" v-if="toggleOptions">
                             <div class="w-1/3 cursor-pointer" @click="chosenFormType('symptoms')">
                                 <div class="flex justify-center">
-                                    <font-awesome-icon icon="fa-regular fa-face-smile" size="4x"/>
-                                    <font-awesome-icon icon="fa-regular fa-face-frown" size="4x"/>
+                                    <font-awesome-icon class="text-primary" icon="fa-regular fa-face-smile" size="4x"/>
+                                    <font-awesome-icon class="text-primary" icon="fa-regular fa-face-frown" size="4x"/>
                                 </div>
-                                <p class="text-lg mt-2">Add Symptoms</p>
+                                <p class="text-lg mt-2 text-primary">Add Symptoms</p>
                             </div>
                             <div class="w-1/3 cursor-pointer" @click="chosenFormType('meal')">
                                 <font-awesome-icon icon="fa-solid fa-utensils" size="4x" />
@@ -104,7 +104,7 @@ const options = reactive({
 
                         </div>
 
-                        <div v-if="formType == 'symptoms'">
+                        <div v-if="formType === 'symptoms'">
                             <label for="call-type" class="block text-sm font-medium text-gray-700"> Symptom Type </label>
                             <div class="mt-1">
                                 <select name="call-type" id="call-type" @change="changeSymptomFormType($event)" class="mt-1 block w-full g-select">
