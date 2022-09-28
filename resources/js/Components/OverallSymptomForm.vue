@@ -6,7 +6,7 @@ let props = defineProps({
 });
 
 let form = useForm({
-    overall_symptom: ''
+    overall_symptom: 1
 });
 let submitForm = () => {
     form.post("save/overall-symptoms", {
@@ -31,8 +31,7 @@ let submitForm = () => {
         </div>
         <input class="w-full" type="range" min="0" max="2" step="1" name="overallSymptoms" id="overallSymptoms" v-model="form.overall_symptom">
         <div v-if="form.errors.overall_symptom">{{ form.errors.overall_symptom }}</div>
-
-        <button class="block" type="submit">Save</button>
+        <button class="block gt-btn" type="submit">Save</button>
     </form>
 </template>
 

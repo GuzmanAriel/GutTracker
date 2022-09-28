@@ -35982,7 +35982,7 @@ __webpack_require__.r(__webpack_exports__);
     expose();
     var props = __props;
     var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.useForm)({
-      overall_symptom: ''
+      overall_symptom: 1
     });
 
     var submitForm = function submitForm() {
@@ -36526,7 +36526,7 @@ var _hoisted_3 = {
 };
 
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  "class": "block",
+  "class": "block gt-btn",
   type: "submit"
 }, "Save", -1
 /* HOISTED */
