@@ -23,12 +23,18 @@ let symptomFormType = ref('')
 
 let toggleOptions = ref(true)
 
-let chosenFormType = (val) => {
-    formType.value = val;
+let closeModal = () => {
+    modalToggle.value = false;
+    toggleOptions.value = true;
+    formType.value = '';
 
-    toggleOptions.value = false;
 }
 
+let chosenFormType = (val) => {
+    formType.value = val;
+    toggleOptions.value = false;
+    console.log(val);
+}
 const options = reactive({
     plugins: [
         dayGridPlugin,
@@ -71,11 +77,12 @@ const options = reactive({
 <template>
     <div>
         <FullCalendar v-bind:options="options"/>
-        <div class="modal fixed z-10 left-0 top-0 w-full h-full light-bg pt-3.5" v-if="modalToggle">
+        <div class="modal fixed z-10 left-0 top-0 w-full h-full light-bg pt-3.5 overflow-scroll" v-if="modalToggle">
             <div class="flex min-h-full items-end justify-center">
                 <div class="modal-content bg-slate-50 m-auto w-4/5 rounded-md">
+                    <span @click="closeModal" class="close float-right text-5xl font-bold text-primary cursor-pointer pr-4">&times;</span>
                     <div class="py-12 px-8 flex flex-col items-center">
-                        <h1 class="text-2xl mb-5 font-bold">What would you like to add?</h1>
+                        <h1 class="text-2xl mb-5 font-bold text-primary">What would you like to add?</h1>
                         <div class="flex justify-center w-full text-center" v-if="toggleOptions">
                             <div class="w-1/3 cursor-pointer" @click="chosenFormType('symptoms')">
                                 <div class="flex justify-center">

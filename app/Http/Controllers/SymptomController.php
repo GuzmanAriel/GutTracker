@@ -14,7 +14,11 @@ class SymptomController extends Controller
     {
         $attributes = request()->validate([
             'overall_symptom' => 'required | integer',
-            'abdominal_symptom' => 'required | integer'
+            'abdominal_symptom' => 'required | integer',
+            'discomfort_symptom' => 'required | integer',
+            'bloating_symptom' => 'required | integer',
+            'fatigue_symptom' => 'required | integer',
+            'brain_symptom' => 'required | integer',
         ]);
         ;
 

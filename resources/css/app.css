@@ -26,10 +26,10 @@
         height: 10px;
         cursor: pointer;
         animate: 0.2s;
-        box-shadow: 1px 1px 1px #000000;
-        background: #6738b7;
+        box-shadow: 1px 1px 1px #cbd5e1;
+        background: #cbd5e1;
         border-radius: 5px;
-        border: 1px solid #000000;
+        border: 1px solid #cbd5e1;
     }
     input[type=range]::-webkit-slider-thumb {
         box-shadow: 1px 1px 1px #6dcabc;
@@ -43,7 +43,7 @@
         margin-top: -11px;
     }
     input[type=range]:focus::-webkit-slider-runnable-track {
-        background: #6738b7;
+        background: #cbd5e1;
     }
     input[type=range]::-moz-range-track {
         width: 100%;
@@ -51,7 +51,7 @@
         cursor: pointer;
         animate: 0.2s;
         box-shadow: 1px 1px 1px #6dcabc;
-        background: #6738b7;
+        background: #cbd5e1;
         border-radius: 5px;
         border: 1px solid #6dcabc;
     }
@@ -74,13 +74,13 @@
         color: transparent;
     }
     input[type=range]::-ms-fill-lower {
-        background: #6738b7;
+        background: #cbd5e1;
         border: 1px solid #000000;
         border-radius: 10px;
         box-shadow: 1px 1px 1px #000000;
     }
     input[type=range]::-ms-fill-upper {
-        background: #6738b7;
+        background: #cbd5e1;
         border: 1px solid #000000;
         border-radius: 10px;
         box-shadow: 1px 1px 1px #000000;
@@ -92,17 +92,20 @@
         height: 30px;
         width: 15px;
         border-radius: 5px;
-        background: #FFFFFF;
         cursor: pointer;
     }
     input[type=range]:focus::-ms-fill-lower {
-        background: #6738b7;
+        background: #cbd5e1;
     }
     input[type=range]:focus::-ms-fill-upper {
-        background: #6738b7;
+        background: #cbd5e1;
     }
-    .gt-btn {
+    .gt-btn-back {
         @apply py-2 px-4 text-sm font-medium border border-primary rounded-md shadow-sm text-primary bg-gray-100 transition hover:bg-primary hover:border-primary hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-75;
+    }
+
+    .gt-btn {
+        @apply py-2 px-4 text-sm font-medium border border-primary rounded-md shadow-sm text-white bg-primary transition hover:bg-gray-100 hover:border-primary hover:text-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-75;
     }
 
 }

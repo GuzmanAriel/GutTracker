@@ -29,57 +29,78 @@ let submitForm = () => {
 <template>
     <form class="mt-4" id="overall-symptoms" name="overall-symptoms" @submit.prevent="submitForm">
         <div>
-            <label class="block mb-4 text-lg text-center" for="overallSymptoms"> Overall Symptoms</label>
+            <label class="block mb-4 text-lg text-center text-primary font-bold" for="overallSymptoms"> Overall Symptoms</label>
+
+            <input class="w-full bg-transparent" type="range" min="0" max="2" step="1" name="overallSymptoms" id="overallSymptoms" v-model="form.overall_symptom">
             <div class="flex justify-between mb-2">
-                <font-awesome-icon class="text-primary" icon="fa-regular fa-face-frown" size="4x"/>
-                <font-awesome-icon class="text-primary" icon="fa-regular fa-face-meh" size="4x"/>
-                <font-awesome-icon class="text-primary" icon="fa-regular fa-face-smile" size="4x"/>
+                <font-awesome-icon class="text-primary" icon="fa-regular fa-face-frown" size="2x"/>
+                <font-awesome-icon class="text-primary" icon="fa-regular fa-face-meh" size="2x"/>
+                <font-awesome-icon class="text-primary" icon="fa-regular fa-face-smile" size="2x"/>
             </div>
-            <input class="w-full" type="range" min="0" max="2" step="1" name="overallSymptoms" id="overallSymptoms" v-model="form.overall_symptom">
             <div v-if="form.errors.overall_symptom">{{ form.errors.overall_symptom }}</div>
         </div>
 
         <div>
-            <label class="block mt-8 mb-1 text-lg text-center" for="abdominalSymptoms"> Overall Abdominal Symptoms</label>
-            <div class="flex justify-between">
-                <p>Sucks</p>
-                <p>Really good</p>
+            <label class="block mt-12 text-center text-primary text-lg font-bold" for="abdominalSymptoms"> Overall Abdominal Symptoms</label>
+            <p class="text-secondary font-bold">{{form.abdominal_symptom}}/10</p>
+            <input class="w-full bg-transparent" type="range" min="0" max="10" name="abdominalSymptoms" id="abdominalSymptoms" v-model="form.abdominal_symptom">
+            <div class="flex justify-between text-primary">
+                <p>Excellent, none at all</p>
+                <p>The worst, it has been awful</p>
             </div>
-            <input class="w-full" type="range" min="0" max="10" step="5" name="abdominalSymptoms" id="abdominalSymptoms" v-model="form.abdominal_symptom">
             <div v-if="form.errors.abdominal_symptom">{{ form.errors.abdominal_symptom }}</div>
         </div>
 
         <div>
-            <label class="block mt-8 mb-1 text-lg text-center" for="bloatingSymptoms"> Abdominal Bloating Symptoms</label>
-            <div class="flex justify-between">
-                <p>Sucks</p>
-                <p>Really good</p>
+            <label class="block mt-12 mb-1 text-lg text-center text-primary font-bold" for="bloatingSymptoms"> Abdominal Bloating</label>
+            <p class="text-secondary font-bold">{{form.bloating_symptom}}/10</p>
+            <input class="w-full bg-transparent" type="range" min="0" max="10" name="bloatingSymptoms" id="bloatingSymptoms" v-model="form.bloating_symptom">
+            <div class="flex justify-between text-primary">
+                <p>Excellent, none at all</p>
+                <p>The worst, it has been awful</p>
             </div>
-            <input class="w-full" type="range" min="0" max="10" step="5" name="bloatingSymptoms" id="bloatingSymptoms" v-model="form.bloating_symptom">
             <div v-if="form.errors.bloating_symptom">{{ form.errors.bloating_symptom }}</div>
+
         </div>
 
         <div>
-            <label class="block mt-8 mb-1 text-lg text-center" for="discomfortSymptoms"> Abdominal Discomfort Symptoms</label>
-            <div class="flex justify-between">
-                <p>Sucks</p>
-                <p>Really good</p>
+            <label class="block mt-12 mb-1 text-lg text-center text-primary font-bold" for="discomfortSymptoms"> Abdominal Pain & Discomfort</label>
+            <p class="text-secondary font-bold">{{form.discomfort_symptom}}/10</p>
+            <input class="w-full bg-transparent" type="range" min="0" max="10" name="discomfortSymptoms" id="discomfortSymptoms" v-model="form.discomfort_symptom">
+            <div class="flex justify-between text-primary">
+                <p>Excellent, none at all</p>
+                <p>The worst, it has been awful</p>
             </div>
-            <input class="w-full" type="range" min="0" max="10" step="5" name="discomfortSymptoms" id="discomfortSymptoms" v-model="form.discomfort_symptom">
             <div v-if="form.errors.discomfort_symptom">{{ form.errors.discomfort_symptom }}</div>
         </div>
 
         <div>
-            <label class="block mt-8 mb-1 text-lg text-center" for="fatigueSymptoms"> Fatigue Symptoms</label>
-            <div class="flex justify-between">
-                <p>Sucks</p>
-                <p>Really good</p>
+            <label class="block mt-12 mb-1 text-lg text-center text-primary font-bold" for="fatigueSymptoms"> Fatigue</label>
+            <p class="text-secondary font-bold">{{form.fatigue_symptom}}/10</p>
+            <input class="w-full bg-transparent" type="range" min="0" max="10" name="fatigueSymptoms" id="fatigueSymptoms" v-model="form.fatigue_symptom">
+            <div class="flex justify-between text-primary">
+                <p>Excellent, none at all</p>
+                <p>The worst, it has been awful</p>
             </div>
-            <input class="w-full" type="range" min="0" max="10" step="5" name="fatigueSymptoms" id="fatigueSymptoms" v-model="form.fatigue_symptom">
             <div v-if="form.errors.fatigue_symptom">{{ form.errors.fatigue_symptom }}</div>
         </div>
 
-        <button class="block gt-btn" type="submit">Save</button>
+        <div class="mb-12">
+            <label class="block mt-12 mb-1 text-lg text-center text-primary font-bold" for="brainSymptoms"> Brain Fog</label>
+            <p class="text-secondary font-bold">{{form.brain_symptom}}/10</p>
+            <input class="w-full bg-transparent" type="range" min="0" max="10" name="fatigueSymptoms" id="brainSymptoms" v-model="form.brain_symptom">
+            <div class="flex justify-between text-primary">
+                <p>Excellent, none at all</p>
+                <p>The worst, it has been awful</p>
+            </div>
+            <div v-if="form.errors.brain_symptom">{{ form.errors.brain_symptom }}</div>
+        </div>
+
+        <div class="flex justify-between">
+            <button class="block gt-btn-back">Back</button>
+            <button class="block gt-btn" type="submit">Submit</button>
+        </div>
+
     </form>
 </template>
 
