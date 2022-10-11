@@ -1,9 +1,20 @@
 <script setup>
+import {ref, toRefs, watch} from "vue";
 import { useForm } from "@inertiajs/inertia-vue3";
 
-let props = defineProps({
-    overallSymptoms: Object
+const props = defineProps({
+    overallSymptoms: Object,
+    toggleOptions: Boolean,
+    modalToggle: Boolean
 });
+
+
+
+
+let closeModalonSubmit = () =>{
+    emit('close-modal');
+}
+
 
 let form = useForm({
     overall_symptom: 1,
@@ -13,11 +24,19 @@ let form = useForm({
     fatigue_symptom: 5,
     brain_symptom: 5
 });
+
+const emit = defineEmits(['toggle-visiblity', 'close-modal'])
+
+
+let backButton = () => {
+    emit('toggle-visiblity');
+};
+
 let submitForm = () => {
     form.post('/save/symptoms', {
         preserveScroll: true,
         onSuccess: (page) => {
-            console.log('saved');
+            closeModalonSubmit();
         },
         onError: () => {
             console.log('error');
@@ -97,7 +116,7 @@ let submitForm = () => {
         </div>
 
         <div class="flex justify-between">
-            <button class="block gt-btn-back">Back</button>
+            <button @click.prevent="backButton" class="block gt-btn-back">Back</button>
             <button class="block gt-btn" type="submit">Submit</button>
         </div>
 

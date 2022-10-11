@@ -35885,6 +35885,12 @@ __webpack_require__.r(__webpack_exports__);
     var formType = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
     var symptomFormType = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
     var toggleOptions = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(true);
+    var dateClickedOn = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
+
+    var setDateClickedOn = function setDateClickedOn(val) {
+      dateClickedOn.value = val;
+      console.log(val);
+    };
 
     var closeModal = function closeModal() {
       modalToggle.value = false;
@@ -35892,10 +35898,14 @@ __webpack_require__.r(__webpack_exports__);
       formType.value = '';
     };
 
+    var toggleVisibility = function toggleVisibility() {
+      toggleOptions.value = true;
+      formType.value = '';
+    };
+
     var chosenFormType = function chosenFormType(val) {
       formType.value = val;
       toggleOptions.value = false;
-      console.log(val);
     };
 
     var options = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
@@ -35910,6 +35920,7 @@ __webpack_require__.r(__webpack_exports__);
       selectable: true,
       dateClick: function dateClick(info) {
         modalToggle.value = true;
+        setDateClickedOn(info.dateStr);
       }
       /* select: (arg) => {
            id.value = id.value + 1;
@@ -35935,7 +35946,10 @@ __webpack_require__.r(__webpack_exports__);
       formType: formType,
       symptomFormType: symptomFormType,
       toggleOptions: toggleOptions,
+      dateClickedOn: dateClickedOn,
+      setDateClickedOn: setDateClickedOn,
       closeModal: closeModal,
+      toggleVisibility: toggleVisibility,
       chosenFormType: chosenFormType,
       options: options,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
@@ -35968,18 +35982,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'SymptomForm',
   props: {
-    overallSymptoms: Object
+    overallSymptoms: Object,
+    toggleOptions: Boolean,
+    modalToggle: Boolean
   },
+  emits: ['toggle-visiblity', 'close-modal'],
   setup: function setup(__props, _ref) {
-    var expose = _ref.expose;
+    var expose = _ref.expose,
+        emit = _ref.emit;
     expose();
     var props = __props;
-    var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.useForm)({
+
+    var closeModalonSubmit = function closeModalonSubmit() {
+      emit('close-modal');
+    };
+
+    var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.useForm)({
       overall_symptom: 1,
       abdominal_symptom: 5,
       bloating_symptom: 5,
@@ -35988,11 +36013,15 @@ __webpack_require__.r(__webpack_exports__);
       brain_symptom: 5
     });
 
+    var backButton = function backButton() {
+      emit('toggle-visiblity');
+    };
+
     var submitForm = function submitForm() {
       form.post('/save/symptoms', {
         preserveScroll: true,
         onSuccess: function onSuccess(page) {
-          console.log('saved');
+          closeModalonSubmit();
         },
         onError: function onError() {
           console.log('error');
@@ -36002,9 +36031,15 @@ __webpack_require__.r(__webpack_exports__);
 
     var __returned__ = {
       props: props,
+      closeModalonSubmit: closeModalonSubmit,
       form: form,
+      emit: emit,
+      backButton: backButton,
       submitForm: submitForm,
-      useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.useForm
+      ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
+      toRefs: vue__WEBPACK_IMPORTED_MODULE_0__.toRefs,
+      watch: vue__WEBPACK_IMPORTED_MODULE_0__.watch,
+      useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.useForm
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -36378,7 +36413,7 @@ var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 
 var _hoisted_6 = {
   key: 0,
-  "class": "flex justify-center w-full text-center"
+  "class": "flex justify-center w-full text-center mt-8"
 };
 var _hoisted_7 = {
   "class": "flex justify-center"
@@ -36391,13 +36426,13 @@ var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 );
 
 var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "text-lg mt-2"
+  "class": "text-lg mt-2 text-primary"
 }, "Add Meal", -1
 /* HOISTED */
 );
 
 var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "text-lg mt-2"
+  "class": "text-lg mt-2 text-primary"
 }, "Add Stool", -1
 /* HOISTED */
 );
@@ -36443,6 +36478,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $setup.chosenFormType('meal');
     })
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_font_awesome_icon, {
+    "class": "text-primary",
     icon: "fa-solid fa-utensils",
     size: "4x"
   }), _hoisted_9]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
@@ -36451,13 +36487,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $setup.chosenFormType('stool');
     })
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_font_awesome_icon, {
+    "class": "text-primary",
     icon: "fa-solid fa-poop",
     size: "4x"
   }), _hoisted_10])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.formType === 'symptoms' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["SymptomForm"], {
-    symptoms: $props.symptoms
+    symptoms: $props.symptoms,
+    onToggleVisiblity: $setup.toggleVisibility,
+    toggleOptions: $setup.toggleOptions,
+    onCloseModal: $setup.closeModal,
+    modalToggle: $setup.modalToggle
   }, null, 8
   /* PROPS */
-  , ["symptoms"])])) : $setup.formType === 'meal' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_12, "Meals")) : $setup.formType === 'stool' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_13, "Stool")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
+  , ["symptoms", "onToggleVisiblity", "toggleOptions", "onCloseModal", "modalToggle"])])) : $setup.formType === 'meal' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_12, "Meals")) : $setup.formType === 'stool' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_13, "Stool")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
 
 /***/ }),
@@ -36597,15 +36638,14 @@ var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 var _hoisted_24 = {
   key: 0
 };
-
-var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_25 = {
   "class": "flex justify-between"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  "class": "block gt-btn-back"
-}, "Back"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+};
+
+var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   "class": "block gt-btn",
   type: "submit"
-}, "Submit")], -1
+}, "Submit", -1
 /* HOISTED */
 );
 
@@ -36616,7 +36656,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "mt-4",
     id: "overall-symptoms",
     name: "overall-symptoms",
-    onSubmit: _cache[6] || (_cache[6] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onSubmit: _cache[7] || (_cache[7] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $setup.submitForm && $setup.submitForm.apply($setup, arguments);
     }, ["prevent"]))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
@@ -36726,7 +36766,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.brain_symptom]]), _hoisted_23, $setup.form.errors.brain_symptom ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.form.errors.brain_symptom), 1
   /* TEXT */
-  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), _hoisted_25], 32
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[6] || (_cache[6] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return $setup.backButton && $setup.backButton.apply($setup, arguments);
+    }, ["prevent"])),
+    "class": "block gt-btn-back"
+  }, "Back"), _hoisted_26])], 32
   /* HYDRATE_EVENTS */
   );
 }

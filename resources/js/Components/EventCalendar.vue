@@ -23,18 +23,31 @@ let symptomFormType = ref('')
 
 let toggleOptions = ref(true)
 
+
+let dateClickedOn = ref('');
+
+let setDateClickedOn = (val) => {
+    dateClickedOn.value = val;
+
+    console.log(val);
+}
+
 let closeModal = () => {
     modalToggle.value = false;
     toggleOptions.value = true;
     formType.value = '';
+}
 
+let toggleVisibility = () => {
+    toggleOptions.value = true;
+    formType.value = '';
 }
 
 let chosenFormType = (val) => {
     formType.value = val;
     toggleOptions.value = false;
-    console.log(val);
 }
+
 const options = reactive({
     plugins: [
         dayGridPlugin,
@@ -52,6 +65,7 @@ const options = reactive({
     selectable: true,
     dateClick: function(info) {
         modalToggle.value = true;
+        setDateClickedOn(info.dateStr);
     }
     /* select: (arg) => {
          id.value = id.value + 1;
@@ -83,7 +97,7 @@ const options = reactive({
                     <span @click="closeModal" class="close float-right text-5xl font-bold text-primary cursor-pointer pr-4">&times;</span>
                     <div class="py-12 px-8 flex flex-col items-center">
                         <h1 class="text-2xl mb-5 font-bold text-primary">What would you like to add?</h1>
-                        <div class="flex justify-center w-full text-center" v-if="toggleOptions">
+                        <div class="flex justify-center w-full text-center mt-8" v-if="toggleOptions">
                             <div class="w-1/3 cursor-pointer" @click="chosenFormType('symptoms')">
                                 <div class="flex justify-center">
                                     <font-awesome-icon class="text-primary" icon="fa-regular fa-face-smile" size="4x"/>
@@ -92,18 +106,18 @@ const options = reactive({
                                 <p class="text-lg mt-2 text-primary">Add Symptoms</p>
                             </div>
                             <div class="w-1/3 cursor-pointer" @click="chosenFormType('meal')">
-                                <font-awesome-icon icon="fa-solid fa-utensils" size="4x" />
-                                <p class="text-lg mt-2">Add Meal</p>
+                                <font-awesome-icon class="text-primary" icon="fa-solid fa-utensils" size="4x"/>
+                                <p class="text-lg mt-2 text-primary">Add Meal</p>
                             </div>
                             <div class="w-1/3 justify-center cursor-pointer" @click="chosenFormType('stool')">
-                                <font-awesome-icon icon="fa-solid fa-poop" size="4x"/>
-                                <p class="text-lg mt-2">Add Stool</p>
+                                <font-awesome-icon class="text-primary" icon="fa-solid fa-poop" size="4x"/>
+                                <p class="text-lg mt-2 text-primary">Add Stool</p>
                             </div>
 
                         </div>
 
                         <div v-if="formType === 'symptoms'" class="max-w-lg w-full">
-                                <SymptomForm :symptoms="symptoms"/>
+                            <SymptomForm :symptoms="symptoms" @toggle-visiblity="toggleVisibility" :toggleOptions="toggleOptions" @close-modal="closeModal" :modalToggle="modalToggle"/>
                         </div>
                         <div v-else-if="formType === 'meal'">Meals</div>
                         <div v-else-if="formType === 'stool'">Stool</div>
